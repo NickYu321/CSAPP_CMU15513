@@ -1,0 +1,211 @@
+I guess I need to change function
+1.free
+2.mm_init 1
+3.find_fit
+4.split_block might not need to change
+5.short find_next and find_prev are for implicit list
+
+Found benchmark throughput 4695 for cpu type Intel(R)Xeon(R)CPUE5520@2.27GHz, benchmark regular
+Throughput targets: min=2348, max=4226, benchmark=4695
+..........................
+Results for mm malloc:
+  valid    util     ops   msecs  Kops/s  trace
+   yes    78.4%      20     0.046    432 ./traces/syn-array-short.rep
+   yes    13.4%      20     0.023    864 ./traces/syn-struct-short.rep
+   yes    15.2%      20     0.023    859 ./traces/syn-string-short.rep
+   yes    73.1%      20     0.028    711 ./traces/syn-mix-short.rep
+   yes    16.0%      36     0.024   1510 ./traces/ngram-fox1.rep
+   yes    40.7%     757     1.483    510 ./traces/syn-mix-realloc.rep
+ * yes    62.0%    5748     7.386    778 ./traces/bdd-aa4.rep
+ * yes    58.1%   87830  1836.295     48 ./traces/bdd-aa32.rep
+ * yes    57.6%   41080   444.568     92 ./traces/bdd-ma4.rep
+ * yes    58.0%  115380  4971.522     23 ./traces/bdd-nq7.rep
+ * yes    55.2%   20547    36.202    568 ./traces/cbit-abs.rep
+ * yes    54.7%   95276   875.541    109 ./traces/cbit-parity.rep
+ * yes    57.3%   89623   790.779    113 ./traces/cbit-satadd.rep
+ * yes    49.1%   50583   248.327    204 ./traces/cbit-xyz.rep
+ * yes    29.9%   32540   126.060    258 ./traces/ngram-gulliver1.rep
+ * yes    31.0%  127912  2080.306     61 ./traces/ngram-gulliver2.rep
+ * yes    28.8%   67012   555.536    121 ./traces/ngram-moby1.rep
+ * yes    28.2%   94828  1123.345     84 ./traces/ngram-shake1.rep
+ * yes    78.4%   80000  2677.180     30 ./traces/syn-array.rep
+ * yes    77.8%   80000  1293.038     62 ./traces/syn-mix.rep
+ * yes    69.3%   80000  1259.498     64 ./traces/syn-string.rep
+ * yes    69.8%   80000  1136.279     70 ./traces/syn-struct.rep
+ p yes       --   80000  4673.001     17 ./traces/syn-array-scaled.rep
+ p yes       --   80000  6188.996     13 ./traces/syn-string-scaled.rep
+ p yes       --   80000  5657.976     14 ./traces/syn-struct-scaled.rep
+ p yes       --   80000  3369.598     24 ./traces/syn-mix-scaled.rep
+16 20     54.1% 1468359 39351.435
+Harmonic mean utilization = 54.1%.
+Harmonic mean throughput (Kops/sec) = 43.
+Perf index = 0.0 (util) + 0.0 (thru) = 0.0/100
+
+Throughput targets: min=2348, max=4226, benchmark=4695
+...............................
+Results for mm malloc:
+  valid    util     ops   msecs  Kops/s  trace
+   yes    81.5%      20     0.000      0 ./traces/syn-giantarray-short.rep
+   yes   100.0%      20     0.000      0 ./traces/syn-giantmix-short.rep
+   yes    90.6%    1000     0.000      0 ./traces/syn-giantarray-med.rep
+   yes    91.9%   80000     0.000      0 ./traces/syn-giantarray.rep
+   yes    91.8%   80000     0.000      0 ./traces/syn-giantmix.rep
+   yes    78.4%      20     0.000      0 ./traces/syn-array-short.rep
+   yes    13.4%      20     0.000      0 ./traces/syn-struct-short.rep
+   yes    15.2%      20     0.000      0 ./traces/syn-string-short.rep
+   yes    73.1%      20     0.000      0 ./traces/syn-mix-short.rep
+   yes    16.0%      36     0.000      0 ./traces/ngram-fox1.rep
+   yes    73.6%     757     0.000      0 ./traces/syn-mix-realloc.rep
+ * yes    62.0%    5748     0.000      0 ./traces/bdd-aa4.rep
+ * yes    58.3%   87830     0.000      0 ./traces/bdd-aa32.rep
+ * yes    58.0%   41080     0.000      0 ./traces/bdd-ma4.rep
+ * yes    58.1%  115380     0.000      0 ./traces/bdd-nq7.rep
+ * yes    56.6%   20547     0.000      0 ./traces/cbit-abs.rep
+ * yes    55.8%   95276     0.000      0 ./traces/cbit-parity.rep
+ * yes    58.0%   89623     0.000      0 ./traces/cbit-satadd.rep
+ * yes    49.6%   50583     0.000      0 ./traces/cbit-xyz.rep
+ * yes    40.6%   32540     0.000      0 ./traces/ngram-gulliver1.rep
+ * yes    42.4%  127912     0.000      0 ./traces/ngram-gulliver2.rep
+ * yes    39.4%   67012     0.000      0 ./traces/ngram-moby1.rep
+ * yes    38.6%   94828     0.000      0 ./traces/ngram-shake1.rep
+ * yes    90.9%   80000     0.000      0 ./traces/syn-array.rep
+ * yes    88.0%   80000     0.000      0 ./traces/syn-mix.rep
+ * yes    74.3%   80000     0.000      0 ./traces/syn-string.rep
+ * yes    75.2%   80000     0.000      0 ./traces/syn-struct.rep
+ p yes       --   80000     0.000      0 ./traces/syn-array-scaled.rep
+ p yes       --   80000     0.000      0 ./traces/syn-string-scaled.rep 
+ p yes       --   80000     0.000      0 ./traces/syn-struct-scaled.rep 
+ p yes       --   80000     0.000      0 ./traces/syn-mix-scaled.rep
+16 20     59.1% 1468359     0.000
+Harmonic mean utilization = 59.1%.
+
+(gdb) bt
+#0  __pthread_kill_implementation (no_tid=0, signo=6, threadid=140737350297472) at ./nptl/pthread_kill.c:44
+#1  __pthread_kill_internal (signo=6, threadid=140737350297472) at ./nptl/pthread_kill.c:78
+#2  __GI___pthread_kill (threadid=140737350297472, signo=signo@entry=6) at ./nptl/pthread_kill.c:89
+#3  0x00007ffff7c9b476 in __GI_raise (sig=sig@entry=6) at ../sysdeps/posix/raise.c:26
+#4  0x00007ffff7c817f3 in __GI_abort () at ./stdlib/abort.c:79
+#5  0x00007ffff7c8171b in __assert_fail_base (fmt=0x7ffff7e36150 "%s%s%s:%u: %s%sAssertion `%s' failed.\n%n", assertion=0x555555655760 <str> "block != ((void*)0)", file=0x55555565540a "mm.c", line=379, function=<optimized out>) 
+    at ./assert/assert.c:92
+#6  0x00007ffff7c92e96 in __GI___assert_fail (assertion=0x555555655760 <str> "block != ((void*)0)", file=0x55555565540a "mm.c", line=379,
+    function=0x555555655e20 <__PRETTY_FUNCTION__.header_to_freenext> "word_t *header_to_freenext(block_t *)") at ./assert/assert.c:101
+#7  0x000055555563a380 in header_to_freenext (block=0x0) at mm.c:379
+#8  0x000055555563a219 in write_next_free (block=0x0, to_block=0x0) at mm.c:395
+#9  0x0000555555639f0e in remove_freelist (block=0x7fffefb026c8) at mm.c:469
+#10 0x000055555563952d in coalesce_block (block=0x7fffefb026c8) at mm.c:606
+#11 0x000055555563881a in extend_heap (size=50112) at mm.c:658
+#12 0x00005555556389aa in mm_malloc (size=50084) at mm.c:833
+#13 0x0000555555637588 in eval_mm_valid (trace=0x606000000020, ranges=0x602000000030) at mdriver.c:996
+#14 0x00005555556371a0 in run_tests (num_tracefiles=1, tracefiles=0x602000000010, mm_stats=0x604000000010, speed_params=0x7fffffffe5c0) at mdriver.c:266
+
+
+Breakpoint 2, mm_malloc (size=568) at mm.c:817
+817         dbg_requires(mm_checkheap(__LINE__));
+(gdb) print bp
+$2 = (void *) 0x7fffefb00000
+(gdb) print heap_start
+$3 = (block_t *) 0x7fffefb00008
+(gdb) print free_start
+$4 = (block_t *) 0x7fffefb00008
+(gdb) print hprobe(bp, -8, 8)
+Invalid probe.  Address 0x7fffefaffff8 is below start of heap
+$5 = void
+(gdb) c
+Continuing.
+
+Breakpoint 2, mm_malloc (size=4) at mm.c:817
+817         dbg_requires(mm_checkheap(__LINE__));
+(gdb) print bp
+$6 = (void *) 0x7fffefb00010
+(gdb) print heap_start
+$7 = (block_t *) 0x7fffefb00008
+(gdb) print free_start
+$8 = (block_t *) 0x7fffefb00258
+(gdb) print hprobe(bp, -8, 8)
+Bytes 0x7fffefb0000f...0x7fffefb00008: 0x0000000000000251
+$9 = void
+(gdb) c
+Continuing.
+
+Breakpoint 2, mm_malloc (size=24) at mm.c:817
+817         dbg_requires(mm_checkheap(__LINE__));
+(gdb) print bp
+$10 = (void *) 0x7fffefb00260
+(gdb) print heap_start
+$11 = (block_t *) 0x7fffefb00008
+(gdb) print free_start
+$12 = (block_t *) 0x7fffefb00258
+(gdb) print hprobe(bp, -8, 8)
+Bytes 0x7fffefb0025f...0x7fffefb00258: 0x0000000000000021
+$13 = void
+(gdb) c
+Continuing.
+
+Breakpoint 2, mm_malloc (size=6) at mm.c:817
+817         dbg_requires(mm_checkheap(__LINE__));
+(gdb) print bp
+$14 = (void *) 0x7fffefb00280
+(gdb) print heap_start
+$15 = (block_t *) 0x7fffefb00008
+(gdb) print free_start
+$16 = (block_t *) 0x7fffefb002a8
+(gdb) print hprobe(bp, -8, 8)
+Bytes 0x7fffefb0027f...0x7fffefb00278: 0x0000000000000031
+$17 = void
+(gdb) c
+Continuing.
+
+Breakpoint 1, mm_free (bp=0x7fffefb002b0) at mm.c:881
+881         dbg_requires(mm_checkheap(__LINE__));
+(gdb) print bp
+$18 = (void *) 0x7fffefb002b0
+(gdb) print heap_start
+$19 = (block_t *) 0x7fffefb00008
+(gdb) print free_start
+$20 = (block_t *) 0x7fffefb002a8
+(gdb) print hprobe(bp, -8, 8)
+Bytes 0x7fffefb002af...0x7fffefb002a8: 0x0000000000000021
+$21 = void
+(gdb) c
+Continuing.
+
+Breakpoint 2, mm_malloc (size=24) at mm.c:817
+817         dbg_requires(mm_checkheap(__LINE__));
+(gdb) print bp
+$22 = (void *) 0x7fffffffe3a0
+(gdb) print heap_start
+$23 = (block_t *) 0x7fffefb00008
+(gdb) print free_start
+$24 = (block_t *) 0x7fffefb002a8
+(gdb) print hprobe(bp, -8, 8)
+Invalid probe.  Address 0x7fffffffe398 is beyond end of heap
+$25 = void
+(gdb) c
+Continuing.
+
+Breakpoint 2, mm_malloc (size=6) at mm.c:817
+817         dbg_requires(mm_checkheap(__LINE__));
+(gdb) print bp
+$26 = (void *) 0x7fffefb002b0
+(gdb) print heap_start
+$27 = (block_t *) 0x7fffefb00008
+(gdb) print free_start
+$28 = (block_t *) 0x7fffefb002d8
+(gdb) print hprobe(bp, -8, 8)
+Bytes 0x7fffefb002af...0x7fffefb002a8: 0x0000000000000031
+$29 = void
+(gdb) c
+Continuing.
+ERROR [trace ./traces/ngram-fox1.rep, line 12]: block 1 (at 0x7fffefb00260) has 4 garbled bytes, starting at byte 0
+
+Breakpoint 1, mm_free (bp=0x7fffefb00260) at mm.c:881
+881         dbg_requires(mm_checkheap(__LINE__));
+(gdb) print bp
+$30 = (void *) 0x7fffefb00260
+(gdb) print free_start
+$31 = (block_t *) 0x7fffefb002d8
+(gdb) print heap_start
+$32 = (block_t *) 0x7fffefb00008
+(gdb) print hprobe(bp, -8, 8)
+Bytes 0x7fffefb0025f...0x7fffefb00258: 0x0000000000000021
+$33 = void

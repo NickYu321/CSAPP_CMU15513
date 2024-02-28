@@ -1,0 +1,10 @@
+./proxy 574890 &
+
+pxy/pxydrive.py -P localhost:574890 -f tests/A01-single-fetch.cmd
+
+pxy/pxyregress.py -p ./proxy -c 4
+
+pxy/pxydrive.py -P localhost:574890 -f tests/D01-basic-text-cache.cmd
+
+pxy/pxydrive.py -p ./proxy -f tests/D12-many-blocks2.cmd
+
